@@ -12,6 +12,8 @@ default = "No Value Present"
 print("Content-Type: text/html")
 print("")
 
+today = datetime.date.today()
+
 body = """<html>
 <head>
 <title>Lab 1 - CGI experiments</title>
@@ -23,10 +25,10 @@ body = """<html>
 </body>
 </html>""".format(
     software=os.environ.get('SERVER_SOFTWARE', default),
-    script='aaaa',
-    month='bbbb',
-    date='cccc',
-    year='dddd',
-    client_ip='eeee'
+    script=os.environ.get('SCRIPT_NAME', default),
+    month=today.month,
+    date=today.day,
+    year=today.year,
+    client_ip=os.environ.get('SSH_CLIENT', default).split(" ")[0]
 )
 print(body)
